@@ -11,10 +11,19 @@
       Telegram.WebApp.ready();
       Telegram.WebApp.expand();
       Telegram.WebApp.MainButton.text = "Send Data";
+      Telegram.WebApp.MainButton.setText("Send Data");
       Telegram.WebApp.MainButton.show();
-      Telegram.WebApp.MainButton.onClick(function() {
-        console.log('Sending data...');
-        Telegram.WebApp.sendData(JSON.stringify({user_id: Telegram.WebApp.initDataUnsafe.user.id}));
+      Telegram.WebApp.MainButton.onClick(() => {
+          if (Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user) {
+              const userData = {
+                  user_id: Telegram.WebApp.initDataUnsafe.user.id,
+                  first_name: Telegram.WebApp.initDataUnsafe.user.first_name,
+              };
+              console.log("Sending data to bot:", userData);
+              Telegram.WebApp.sendData(JSON.stringify(userData));
+          } else {
+              console.error("User data is not available!");
+          }
       });
     </script>
   </body>
