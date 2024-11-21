@@ -9,6 +9,7 @@
     <h1>Welcome to the Web App</h1>
     <div id="debug" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc;"></div>
     <script>
+      let tg = window.Telegram.WebApp;
       // Функция для вывода сообщений на экран
       function logMessage(message) {
           const debugDiv = document.getElementById('debug');
@@ -16,26 +17,21 @@
           paragraph.textContent = message;
           debugDiv.appendChild(paragraph);
       }
-      Telegram.WebApp.ready();
-      Telegram.WebApp.expand();
-      Telegram.WebApp.MainButton.text = "Send Data";
-      Telegram.WebApp.MainButton.setText("Send Data");
-      Telegram.WebApp.MainButton.show();
-      // Выводим информацию при загрузке страницы
+      tg.ready();
+      tg.expand();
+      tg.MainButton.text = "Send Data";
+      tg.MainButton.setText("Send Data");
+      tg.MainButton.show();
       logMessage("Web App initialized.");
       logMessage(`Init Data: ${JSON.stringify(Telegram.WebApp.initDataUnsafe)}`);
-      Telegram.WebApp.MainButton.onClick(() => {
+      tg.MainButton.onClick(() => {
           logMessage("MainButton clicked!");
-          if (Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user) {
-              const userData = {
-                  user_id: Telegram.WebApp.initDataUnsafe.user.id,
-                  first_name: Telegram.WebApp.initDataUnsafe.user.first_name,
-              };
-              logMessage(`Sending data to bot: ${JSON.stringify(userData)}`);
-              Telegram.WebApp.sendData(JSON.stringify(userData));
-          } else {
-              logMessage("User data is not available!");
-          }
+          const userData = {
+              user_id: tg.initDataUnsafe.user.id,
+              first_name: tg.initDataUnsafe.user.first_name,
+          };
+          logMessage(`Sending data to bot: ${JSON.stringify(userData)}`);
+          tg.sendData(JSON.stringify(userData));
       });
     </script>
   </body>
