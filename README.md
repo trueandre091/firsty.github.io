@@ -24,16 +24,16 @@
       tg.MainButton.show();
       logMessage("Web App initialized.");
       logMessage(`Init Data: ${JSON.stringify(Telegram.WebApp.initDataUnsafe)}`);
-      tg.MainButton.onClick(() => {
-          logMessage("MainButton clicked!");
-          const userData = {
-              user_id: tg.initDataUnsafe.user.id,
-              first_name: tg.initDataUnsafe.user.first_name,
-          };
-          logMessage(`Sending data to bot: ${JSON.stringify(userData)}`);
-          tg.sendData(JSON.stringify(userData));
+      Telegram.WebApp.MainButton.onClick(() => {
+        const userData = {
+            user_id: Telegram.WebApp.initDataUnsafe?.user?.id || "Unknown",
+            first_name: Telegram.WebApp.initDataUnsafe?.user?.first_name || "Unknown",
+        };
+        // Логируем данные перед отправкой
+        document.body.innerHTML += `<p>Sending data: ${JSON.stringify(userData)}</p>`;
+        // Отправляем данные
+        Telegram.WebApp.sendData(JSON.stringify(userData));
       });
     </script>
   </body>
 </html>
-
