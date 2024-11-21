@@ -1,15 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>ТЕСТ</title>
-</head>
-<body>
-    <div id="main">
-        <h1>Telegram bot с нуля</h1>
-        <img src="https://i.postimg.cc/nzpgq44L/2342135135151515.png">
-        <p>Абоба ЕЕЕЕЕССС</p>
-        <button id="buy">Купить!</button>
-    </div>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Telegram Web App</title>
+  </head>
+  <body>
+    <h1>Welcome to the Web App</h1>
+    <script>
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+      Telegram.WebApp.MainButton.text = "Send Data";
+      Telegram.WebApp.MainButton.show();
+      Telegram.WebApp.MainButton.onClick(function() {
+        Telegram.WebApp.sendData(JSON.stringify({user_id: Telegram.WebApp.initDataUnsafe.user.id}));
+      });
+    </script>
+  </body>
 </html>
